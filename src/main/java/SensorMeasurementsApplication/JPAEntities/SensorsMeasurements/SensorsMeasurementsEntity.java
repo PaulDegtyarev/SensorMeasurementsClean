@@ -3,6 +3,8 @@ package SensorMeasurementsApplication.JPAEntities.SensorsMeasurements;
 import SensorMeasurementsApplication.JPAEntities.MeasurementsTypeEntity;
 import SensorMeasurementsApplication.JPAEntities.SensorsEntity;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "sensors_measurements", schema = "public")
@@ -14,7 +16,7 @@ public class SensorsMeasurementsEntity {
     @JoinColumn(name = "sensor_id", insertable=false, updatable=false)
     private SensorsEntity sensor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id", insertable = false, updatable = false)
     private MeasurementsTypeEntity measurementsTypes;
 

@@ -25,6 +25,8 @@ public class MeteostationsEntity {
         this.stationCountry = stationCountry;
     }
 
+    public MeteostationsEntity(){}
+
     public Integer getStationId() {
         return stationId;
     }

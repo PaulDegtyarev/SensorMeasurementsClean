@@ -2,14 +2,16 @@ package SensorMeasurementsApplication.JPAEntities;
 
 import SensorMeasurementsApplication.JPAEntities.SensorsMeasurements.SensorsMeasurementsEntity;
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "sensors", schema = "public")
 public class SensorsEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "sensor_id") private Integer sensorId;
-    @Column(name = "sensor_name") private String sensorName;
+    @Column(name = "sensor_name", nullable = false)  private String sensorName;
 
     public SensorsEntity(String sensorName){
         this.sensorName = sensorName;
@@ -17,10 +19,10 @@ public class SensorsEntity {
 
     public SensorsEntity(){}
 
-    @OneToMany(mappedBy = "sensor", cascade = CascadeType.ALL)
-    private Set<SensorsMeasurementsEntity> sensorsMeasurements;
+    @OneToMany(mappedBy = "sensor")
+    private List<SensorsMeasurementsEntity> sensorsMeasurements;
 
-    @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sensor")
     private Set<MeteostationsSensorsEntity> meteostationsSensors;
 
     public Integer getSensorId() {
@@ -39,11 +41,11 @@ public class SensorsEntity {
         this.sensorName = sensorName;
     }
 
-    public Set<SensorsMeasurementsEntity> getSensorsMeasurements() {
+    public List<SensorsMeasurementsEntity> getSensorsMeasurements() {
         return sensorsMeasurements;
     }
 
-    public void setSensorsMeasurements(Set<SensorsMeasurementsEntity> sensorsMeasurements) {
+    public void setSensorsMeasurements(List<SensorsMeasurementsEntity> sensorsMeasurements) {
         this.sensorsMeasurements = sensorsMeasurements;
     }
 
