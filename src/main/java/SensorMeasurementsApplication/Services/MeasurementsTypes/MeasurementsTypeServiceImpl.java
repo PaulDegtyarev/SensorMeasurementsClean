@@ -38,9 +38,7 @@ public class MeasurementsTypeServiceImpl implements MeasurementsTypeService{
 
         MeasurementsTypeEntity dsResponse = measurementsTypeDS.create(dsRequestModel);
 
-        MeasurementsTypeResponseModelPost response = new MeasurementsTypeResponseModelPost(dsResponse.getTypeId(), dsResponse.getTypeName(), dsResponse.getTypeUnits());
-
-        return measurementsTypePresenter.prepareSuccessView(response);
+        return measurementsTypePresenter.prepareSuccessView(makePostResponse(dsResponse));
     }
 
     @Override
@@ -58,15 +56,20 @@ public class MeasurementsTypeServiceImpl implements MeasurementsTypeService{
 
     @Override
     public MeasurementsTypeResponseModelGetAll getAll(){
-        List<MeasurementsTypeEntity> measurementsTypesList = measurementsTypeDS.getAll();
+        return measurementsTypePresenter.prepareSuccessGetAllView(makeAllResponse(measurementsTypeDS.getAll()));
+    }
 
+    private static MeasurementsTypeResponseModelGetAll makeAllResponse(List<MeasurementsTypeEntity> measurementsTypesList){
         List<MeasurementsTypeResponseModelPost> responseList = new ArrayList<>();
         for (MeasurementsTypeEntity type : measurementsTypesList){
             MeasurementsTypeResponseModelPost el = new MeasurementsTypeResponseModelPost(type.getTypeId(), type.getTypeName(), type.getTypeUnits());
             responseList.add(el);
         }
 
-        MeasurementsTypeResponseModelGetAll response = new MeasurementsTypeResponseModelGetAll(responseList);
-        return measurementsTypePresenter.prepareSuccessGetAllView(response);
+        return new MeasurementsTypeResponseModelGetAll(responseList);
+    }
+
+    private static MeasurementsTypeResponseModelPost makePostResponse(MeasurementsTypeEntity dsResponse){
+        return new MeasurementsTypeResponseModelPost(dsResponse.getTypeId(), dsResponse.getTypeName(), dsResponse.getTypeUnits());
     }
 }
