@@ -1,10 +1,16 @@
 package SensorMeasurementsApplication.Presenters.MeasurementsTypes;
 
 import SensorMeasurementsApplication.Exceptions.MeasurementsTypes.MeasurementsTypeConflictException;
+import SensorMeasurementsApplication.Exceptions.MeasurementsTypes.MeasurementsTypeNotFoundException;
+import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelGetAll;
 import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelPost;
 
 public interface MeasurementsTypePresenter {
     MeasurementsTypeResponseModelPost prepareSuccessView(MeasurementsTypeResponseModelPost response);
 
     MeasurementsTypeConflictException prepareMeasurementsTypeConflictView();
+
+    MeasurementsTypeNotFoundException prepareMeasurementsTypeNotFoundView();
+
+    MeasurementsTypeResponseModelGetAll prepareSuccessGetAllView(MeasurementsTypeResponseModelGetAll response);
 }

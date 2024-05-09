@@ -1,5 +1,8 @@
 package SensorMeasurementsApplication.Responses.MeasurementsTypes;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 public class MeasurementsTypeResponseModelPost {
     private Integer type_id;
     private String type_name;

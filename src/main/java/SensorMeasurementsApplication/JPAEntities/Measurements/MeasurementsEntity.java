@@ -1,5 +1,6 @@
 package SensorMeasurementsApplication.JPAEntities.Measurements;
 
+import SensorMeasurementsApplication.JPAEntities.MeasurementsTypeEntity;
 import SensorMeasurementsApplication.JPAEntities.MeteostationsSensorsEntity;
 import jakarta.persistence.*;
 
@@ -12,11 +13,16 @@ public class MeasurementsEntity {
     @JoinColumn(name = "sensor_inventory_number", insertable = false, updatable = false)
     private MeteostationsSensorsEntity meteostationsSensors;
 
+    @ManyToOne
+    @JoinColumn(name = "measurement_type", insertable = false, updatable = false)
+    private MeasurementsTypeEntity measurementsType;
+
 
     public MeasurementsEntity(MeasurementsKey measurementsKey) {
         this.measurementsKey = measurementsKey;
     }
 
+    public MeasurementsEntity(){}
 
     public MeasurementsKey getMeasurementsKey() {
         return measurementsKey;
@@ -32,5 +38,13 @@ public class MeasurementsEntity {
 
     public void setMeteostationsSensors(MeteostationsSensorsEntity meteostationsSensors) {
         this.meteostationsSensors = meteostationsSensors;
+    }
+
+    public MeasurementsTypeEntity getMeasurementsType() {
+        return measurementsType;
+    }
+
+    public void setMeasurementsType(MeasurementsTypeEntity measurementsType) {
+        this.measurementsType = measurementsType;
     }
 }

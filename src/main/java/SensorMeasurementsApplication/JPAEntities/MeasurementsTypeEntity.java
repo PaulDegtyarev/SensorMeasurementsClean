@@ -15,9 +15,8 @@ public class MeasurementsTypeEntity {
     @Column(name = "type_name") private String typeName;
     @Column(name = "type_units") private String typeUnits;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "measurement_type")
-    private List<MeasurementsEntity> measurements = new ArrayList<>();
+    @OneToMany(mappedBy = "measurementsType", cascade = CascadeType.ALL)
+    private Set<MeasurementsEntity> measurements;
 
     @OneToMany(mappedBy = "measurementsTypes", cascade = CascadeType.ALL)
     private Set<SensorsMeasurementsEntity> sensorsMeasurements;
@@ -53,11 +52,11 @@ public class MeasurementsTypeEntity {
         this.typeUnits = typeUnits;
     }
 
-    public List<MeasurementsEntity> getMeasurements() {
+    public Set<MeasurementsEntity> getMeasurements() {
         return measurements;
     }
 
-    public void setMeasurements(List<MeasurementsEntity> measurements) {
+    public void setMeasurements(Set<MeasurementsEntity> measurements) {
         this.measurements = measurements;
     }
 

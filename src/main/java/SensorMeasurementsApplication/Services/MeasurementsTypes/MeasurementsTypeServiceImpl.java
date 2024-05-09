@@ -7,9 +7,13 @@ import SensorMeasurementsApplication.JPAEntities.MeasurementsTypeEntity;
 import SensorMeasurementsApplication.Presenters.MeasurementsTypes.MeasurementsTypePresenter;
 import SensorMeasurementsApplication.RequestBodies.MeasurementsTypesRequestBody.MeasurementsTypesRequestBody;
 import SensorMeasurementsApplication.RequestDataStoreModels.MeasurementsTypes.MeasurementsTypeDSRequestModel;
+import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelGetAll;
 import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class MeasurementsTypeServiceImpl implements MeasurementsTypeService{
@@ -37,5 +41,32 @@ public class MeasurementsTypeServiceImpl implements MeasurementsTypeService{
         MeasurementsTypeResponseModelPost response = new MeasurementsTypeResponseModelPost(dsResponse.getTypeId(), dsResponse.getTypeName(), dsResponse.getTypeUnits());
 
         return measurementsTypePresenter.prepareSuccessView(response);
+    }
+
+    @Override
+    public void delete(Integer typeId){
+        if (!measurementsTypeDS.existsByTypeId(typeId)) throw measurementsTypePresenter.prepareMeasurementsTypeNotFoundView();
+        if (measurementsTypeDS.hasMeasurements(typeId)) throw measurementsTypePresenter.prepareMeasurementsTypeConflictView();
+        measurementsTypeDS.delete(typeId);
+    }
+
+    @Override
+    public void update(Integer typeId, MeasurementsTypesRequestBody data){
+        if (!measurementsTypeDS.existsByTypeId(typeId)) throw measurementsTypePresenter.prepareMeasurementsTypeNotFoundView();
+        measurementsTypeDS.update(typeId, data);
+    }
+
+    @Override
+    public MeasurementsTypeResponseModelGetAll getAll(){
+        List<MeasurementsTypeEntity> measurementsTypesList = measurementsTypeDS.getAll();
+
+        List<MeasurementsTypeResponseModelPost> responseList = new ArrayList<>();
+        for (MeasurementsTypeEntity type : measurementsTypesList){
+            MeasurementsTypeResponseModelPost el = new MeasurementsTypeResponseModelPost(type.getTypeId(), type.getTypeName(), type.getTypeUnits());
+            responseList.add(el);
+        }
+
+        MeasurementsTypeResponseModelGetAll response = new MeasurementsTypeResponseModelGetAll(responseList);
+        return measurementsTypePresenter.prepareSuccessGetAllView(response);
     }
 }

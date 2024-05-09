@@ -1,13 +1,14 @@
 package SensorMeasurementsApplication.Controllers;
 
 import SensorMeasurementsApplication.RequestBodies.MeasurementsTypesRequestBody.MeasurementsTypesRequestBody;
+import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelGetAll;
 import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelPost;
 import SensorMeasurementsApplication.Services.MeasurementsTypes.MeasurementsTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MeasurementsTypeController {
@@ -20,7 +21,17 @@ public class MeasurementsTypeController {
 
     @PostMapping("/types")
     @Transactional
-    MeasurementsTypeResponseModelPost create(@RequestBody MeasurementsTypesRequestBody data){
-        return measurementsTypeService.create(data);
+    ResponseEntity<MeasurementsTypeResponseModelPost> create(@RequestBody MeasurementsTypesRequestBody data){return new ResponseEntity<>(measurementsTypeService.create(data), HttpStatus.CREATED);}
+
+    @DeleteMapping("/types/{type_id}")
+    void delete(@PathVariable("type_id") Integer typeId){
+        measurementsTypeService.delete(typeId);
     }
+
+    @PutMapping("/types/{type_id}")
+    void update(@PathVariable("type_id") Integer typeId,
+                @RequestBody MeasurementsTypesRequestBody data){measurementsTypeService.update(typeId, data);}
+
+    @GetMapping("/types")
+    MeasurementsTypeResponseModelGetAll getAll(){return measurementsTypeService.getAll();}
 }
