@@ -2,6 +2,7 @@ package SensorMeasurementsApplication.Services.Sensors;
 
 import SensorMeasurementsApplication.RequestBodies.Sensors.Post.SensorsPostRequestBody;
 import SensorMeasurementsApplication.Responses.Sensors.GetAll.SensorsResponseModelGetAll;
+import SensorMeasurementsApplication.Responses.Sensors.GetTypes.SensorsResponseModelGetTypes;
 import SensorMeasurementsApplication.Responses.Sensors.Post.SensorsResponseModelPost;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface SensorsService {
     SensorsResponseModelGetAll all();
 
     SensorsResponseModelPost one(Integer sensorId);
+
+    SensorsResponseModelGetTypes byType(Integer sensorId);
 }

@@ -11,15 +11,13 @@ import SensorMeasurementsApplication.JPARepository.SensorsMeasurementsRepository
 import SensorMeasurementsApplication.JPARepository.SensorsRepository;
 import SensorMeasurementsApplication.RequestBodies.Sensors.Post.SensorsMeasurementsRequestBodyList;
 import SensorMeasurementsApplication.RequestDataStoreModels.Sensors.SensorsRequestDSModel;
+import SensorMeasurementsApplication.ResponseDataStoreModels.Sensors.SensorsDSResponseGetTypes;
 import SensorMeasurementsApplication.ResponseDataStoreModels.Sensors.SensorsDSResponsePost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import static java.lang.System.out;
 
 @Component
 public class SensorsDSImpl implements SensorsDS{
@@ -83,6 +81,19 @@ public class SensorsDSImpl implements SensorsDS{
     public SensorsDSResponsePost one(Integer sensorId){
         SensorsEntity sensor = sensorsRepository.findById(sensorId).orElseThrow(SensorsNotFoundException::new);
         return new SensorsDSResponsePost(sensor, sensor.getSensorsMeasurements());
+    }
+
+    @Override
+    public List<SensorsDSResponseGetTypes> getTypes(Integer sensorId){
+        SensorsEntity sensor = sensorsRepository.findById(sensorId).orElseThrow(SensorsNotFoundException::new);
+
+        List<SensorsDSResponseGetTypes> dsResponse = new ArrayList<>();
+        for (SensorsMeasurementsEntity sensorsMeasurements : sensor.getSensorsMeasurements()){
+            SensorsDSResponseGetTypes el = new SensorsDSResponseGetTypes(sensorsMeasurements.getSensorsMeasurementsKey().getTypeId(), sensorsMeasurements.getMeasurementsTypes().getTypeName(), sensorsMeasurements.getMeasurementsTypes().getTypeUnits(), sensorsMeasurements.getTypeFormula());
+            dsResponse.add(el);
+        }
+
+        return dsResponse;
     }
 
     @Override

@@ -5,6 +5,7 @@ import SensorMeasurementsApplication.Exceptions.Sensors.SensorsConfictException;
 import SensorMeasurementsApplication.Exceptions.Sensors.SensorsHasMeasurementsException;
 import SensorMeasurementsApplication.Exceptions.Sensors.SensorsNotFoundException;
 import SensorMeasurementsApplication.Responses.Sensors.GetAll.SensorsResponseModelGetAll;
+import SensorMeasurementsApplication.Responses.Sensors.GetTypes.SensorsResponseModelGetTypes;
 import SensorMeasurementsApplication.Responses.Sensors.Post.SensorsResponseModelPost;
 import org.springframework.stereotype.Component;
 
@@ -29,4 +30,12 @@ public class SensorsPresenterImpl implements SensorsPresenter {
 
     @Override
     public SensorsResponseModelGetAll prepareSuccessGetAllView(SensorsResponseModelGetAll response){return response;}
+
+
+    @Override
+    public SensorsResponseModelGetTypes prepareSuccessGetTypeView(SensorsResponseModelGetTypes response){return response;}
+
 }
+
+
+

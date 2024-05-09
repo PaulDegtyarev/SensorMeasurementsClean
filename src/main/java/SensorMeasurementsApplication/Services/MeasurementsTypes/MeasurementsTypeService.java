@@ -1,0 +1,8 @@
+package SensorMeasurementsApplication.Services.MeasurementsTypes;
+
+import SensorMeasurementsApplication.RequestBodies.MeasurementsTypesRequestBody.MeasurementsTypesRequestBody;
+import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelPost;
+
+public interface MeasurementsTypeService {
+    MeasurementsTypeResponseModelPost create(MeasurementsTypesRequestBody data);
+}

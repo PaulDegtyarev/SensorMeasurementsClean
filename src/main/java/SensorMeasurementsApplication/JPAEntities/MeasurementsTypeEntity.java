@@ -22,11 +22,9 @@ public class MeasurementsTypeEntity {
     @OneToMany(mappedBy = "measurementsTypes", cascade = CascadeType.ALL)
     private Set<SensorsMeasurementsEntity> sensorsMeasurements;
 
-    public MeasurementsTypeEntity(Integer typeId, String typeName, String typeUnits, List<MeasurementsEntity> measurements) {
-        this.typeId = typeId;
+    public MeasurementsTypeEntity(String typeName, String typeUnits) {
         this.typeName = typeName;
         this.typeUnits = typeUnits;
-        this.measurements = measurements;
     }
 
     public MeasurementsTypeEntity(){}

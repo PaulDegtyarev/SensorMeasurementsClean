@@ -1,0 +1,10 @@
+package SensorMeasurementsApplication.Presenters.MeasurementsTypes;
+
+import SensorMeasurementsApplication.Exceptions.MeasurementsTypes.MeasurementsTypeConflictException;
+import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelPost;
+
+public interface MeasurementsTypePresenter {
+    MeasurementsTypeResponseModelPost prepareSuccessView(MeasurementsTypeResponseModelPost response);
+
+    MeasurementsTypeConflictException prepareMeasurementsTypeConflictView();
+}

@@ -2,6 +2,7 @@ package SensorMeasurementsApplication.DataStores.Sensors;
 
 import SensorMeasurementsApplication.JPAEntities.SensorsEntity;
 import SensorMeasurementsApplication.RequestDataStoreModels.Sensors.SensorsRequestDSModel;
+import SensorMeasurementsApplication.ResponseDataStoreModels.Sensors.SensorsDSResponseGetTypes;
 import SensorMeasurementsApplication.ResponseDataStoreModels.Sensors.SensorsDSResponsePost;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface SensorsDS {
     List<SensorsEntity> all();
 
     SensorsDSResponsePost one(Integer sensorId);
+
+    List<SensorsDSResponseGetTypes> getTypes(Integer sensorId);
 
     boolean existsByTypeId(Integer typeId);
 

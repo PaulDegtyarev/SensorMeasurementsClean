@@ -5,6 +5,7 @@ import SensorMeasurementsApplication.DataStores.Sensors.SensorsDS;
 import SensorMeasurementsApplication.RequestBodies.Sensors.Post.SensorsPostRequestBody;
 import SensorMeasurementsApplication.RequestBodies.Sensors.Put.SensorsRequestModelPut;
 import SensorMeasurementsApplication.Responses.Sensors.GetAll.SensorsResponseModelGetAll;
+import SensorMeasurementsApplication.Responses.Sensors.GetTypes.SensorsResponseModelGetTypes;
 import SensorMeasurementsApplication.Responses.Sensors.Post.SensorsResponseModelPost;
 import SensorMeasurementsApplication.Services.Sensors.SensorsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,10 @@ public class SensorsController {
     @GetMapping("/sensor/{sensor_id}")
     SensorsResponseModelPost one(@PathVariable("sensor_id") Integer sensorId){
         return sensorsService.one(sensorId);
+    }
+
+    @GetMapping("/sensor/{sensor_id}/type")
+    SensorsResponseModelGetTypes byType(@PathVariable("sensor_id") Integer sensorId){
+        return sensorsService.byType(sensorId);
     }
 }

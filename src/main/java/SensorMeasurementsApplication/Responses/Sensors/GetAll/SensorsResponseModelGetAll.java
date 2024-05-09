@@ -5,7 +5,7 @@ import SensorMeasurementsApplication.Responses.Sensors.Post.SensorsResponseModel
 import java.util.List;
 
 public class SensorsResponseModelGetAll {
-    List<SensorsResponseModelPost> sensors;
+    private List<SensorsResponseModelPost> sensors;
 
     public List<SensorsResponseModelPost> getSensors() {
         return sensors;

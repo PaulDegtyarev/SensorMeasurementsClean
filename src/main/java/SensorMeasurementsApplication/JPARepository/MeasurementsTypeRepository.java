@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MeasurementsTypeRepository extends JpaRepository<MeasurementsTypeEntity, Integer> {
     boolean existsByTypeId(Integer typeId);
+    boolean existsByTypeName(String typeName);
 }
