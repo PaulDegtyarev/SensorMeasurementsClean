@@ -82,17 +82,10 @@ public class SensorsServiceImpl implements SensorsService{
 
         List<SensorsDSResponseGetTypes> dsResponse = sensorsDS.getTypes(sensorId);
 
-        List<SensorsMeasurementsResponseModelPostList> responseList = new ArrayList<>();
-        for (SensorsDSResponseGetTypes el : dsResponse){
-            SensorsMeasurementsResponseModelPostList responseEl = new SensorsMeasurementsResponseModelPostList(el.getTypeId(), el.getTypeName(), el.getTypeUnits(), el.getTypeFormula());
-            responseList.add(responseEl);
-        }
-
-        SensorsResponseModelGetTypes response = new SensorsResponseModelGetTypes(responseList);
-        return sensorsPresenter.prepareSuccessGetTypeView(response);
+        return sensorsPresenter.prepareSuccessGetTypeView(makeSensorsResponseByType(dsResponse));
     }
 
-    private static SensorsResponseModelPost makeSensorsResponsePost(SensorsDSResponsePost dsResponse) {
+    private SensorsResponseModelPost makeSensorsResponsePost(SensorsDSResponsePost dsResponse) {
        List<SensorsMeasurementsResponseModelPostList> sensorsMeasurements = new ArrayList<>();
        for (SensorsMeasurementsEntity sM : dsResponse.getSensorsMeasurements()){
            SensorsMeasurementsResponseModelPostList list = new SensorsMeasurementsResponseModelPostList(sM.getSensorsMeasurementsKey().getTypeId(), sM.getMeasurementsTypes().getTypeName(), sM.getMeasurementsTypes().getTypeUnits(), sM.getTypeFormula());
@@ -102,7 +95,7 @@ public class SensorsServiceImpl implements SensorsService{
         return new SensorsResponseModelPost(dsResponse.getSensor().getSensorId(), dsResponse.getSensor().getSensorName(), sensorsMeasurements);
     }
 
-    private static SensorsResponseModelPost makeSensorsResponseGetOne(SensorsDSResponsePost dsResponse){
+    private SensorsResponseModelPost makeSensorsResponseGetOne(SensorsDSResponsePost dsResponse){
         List<SensorsMeasurementsResponseModelPostList> responseList = new ArrayList<>();
         for (SensorsMeasurementsEntity measurements : dsResponse.getSensorsMeasurements()){
             SensorsMeasurementsResponseModelPostList list = new SensorsMeasurementsResponseModelPostList(measurements.getSensorsMeasurementsKey().getTypeId(), measurements.getMeasurementsTypes().getTypeName(), measurements.getMeasurementsTypes().getTypeUnits(), measurements.getTypeFormula());
@@ -111,7 +104,7 @@ public class SensorsServiceImpl implements SensorsService{
         return new SensorsResponseModelPost(dsResponse.getSensor().getSensorId(), dsResponse.getSensor().getSensorName(), responseList);
     }
     
-    private static SensorsResponseModelGetAll makeSensorsResponseGetAll(List<SensorsEntity> dsResponsePostList){
+    private SensorsResponseModelGetAll makeSensorsResponseGetAll(List<SensorsEntity> dsResponsePostList){
         List<SensorsResponseModelPost> answer = new ArrayList<>();
         
         for (SensorsEntity sensor : dsResponsePostList){
@@ -124,6 +117,16 @@ public class SensorsServiceImpl implements SensorsService{
             answer.add(model);
         }
         return new SensorsResponseModelGetAll(answer);
+    }
+
+    private SensorsResponseModelGetTypes makeSensorsResponseByType(List<SensorsDSResponseGetTypes> dsResponse) {
+        List<SensorsMeasurementsResponseModelPostList> responseList = new ArrayList<>();
+        for (SensorsDSResponseGetTypes el : dsResponse) {
+            SensorsMeasurementsResponseModelPostList responseEl = new SensorsMeasurementsResponseModelPostList(el.getTypeId(), el.getTypeName(), el.getTypeUnits(), el.getTypeFormula());
+            responseList.add(responseEl);
+        }
+
+        return new SensorsResponseModelGetTypes(responseList);
     }
 
 }

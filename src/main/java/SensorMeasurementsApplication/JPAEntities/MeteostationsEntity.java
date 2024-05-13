@@ -2,23 +2,23 @@ package SensorMeasurementsApplication.JPAEntities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "meteostations", schema = "public")
 public class MeteostationsEntity {
-    @Column(name = "station_id") @Id @GeneratedValue private Integer stationId;
+    @Column(name = "station_id") @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer stationId;
     @Column(name = "station_name") private String stationName;
     @Column(name = "station_longitude") private Double stationLongitude;
     @Column(name = "station_latitude") private Double stationLatitude;
     @Column(name = "station_country") private String stationCountry;
 
     @OneToMany(mappedBy = "meteostation", cascade = CascadeType.ALL)
-    private Set<MeteostationsSensorsEntity> meteostationsSensors;
+    private List<MeteostationsSensorsEntity> meteostationsSensors;
 
 
-    public MeteostationsEntity(Integer stationId, String stationName, Double stationLongitude, Double stationLatitude, String stationCountry) {
-        this.stationId = stationId;
+    public MeteostationsEntity(String stationName, Double stationLongitude, Double stationLatitude, String stationCountry) {
         this.stationName = stationName;
         this.stationLongitude = stationLongitude;
         this.stationLatitude = stationLatitude;
@@ -67,11 +67,11 @@ public class MeteostationsEntity {
         this.stationCountry = stationCountry;
     }
 
-    public Set<MeteostationsSensorsEntity> getMeteostationsSensors() {
+    public List<MeteostationsSensorsEntity> getMeteostationsSensors() {
         return meteostationsSensors;
     }
 
-    public void setMeteostationsSensors(Set<MeteostationsSensorsEntity> meteostationsSensors) {
+    public void setMeteostationsSensors(List<MeteostationsSensorsEntity> meteostationsSensors) {
         this.meteostationsSensors = meteostationsSensors;
     }
 }
