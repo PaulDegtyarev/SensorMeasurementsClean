@@ -3,9 +3,9 @@ package SensorMeasurementsApplication.CustomModels.SensorsMeasurements;
 public class SensorsMeasurementsImpl implements SensorsMeasurements{
     private Integer sensorId;
     private Integer typeId;
-    private Integer typeFormula;
+    private String typeFormula;
 
-    public SensorsMeasurementsImpl(Integer sensorId, Integer typeId, Integer typeFormula) {
+    public SensorsMeasurementsImpl(Integer sensorId, Integer typeId, String typeFormula) {
         this.sensorId = sensorId;
         this.typeId = typeId;
         this.typeFormula = typeFormula;
@@ -32,11 +32,11 @@ public class SensorsMeasurementsImpl implements SensorsMeasurements{
     }
 
     @Override
-    public Integer getTypeFormula() {
+    public String getTypeFormula() {
         return typeFormula;
     }
 
-    public void setTypeFormula(Integer typeFormula) {
+    public void setTypeFormula(String typeFormula) {
         this.typeFormula = typeFormula;
     }
 }

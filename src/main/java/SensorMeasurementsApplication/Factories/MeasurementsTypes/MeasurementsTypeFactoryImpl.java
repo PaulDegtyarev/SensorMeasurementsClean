@@ -2,7 +2,7 @@ package SensorMeasurementsApplication.Factories.MeasurementsTypes;
 
 import SensorMeasurementsApplication.CustomModels.MeasurementsTypes.MeasurementsType;
 import SensorMeasurementsApplication.CustomModels.MeasurementsTypes.MeasurementsTypeImpl;
-import SensorMeasurementsApplication.RequestBodies.MeasurementsTypesRequestBody.MeasurementsTypesRequestBody;
+import SensorMeasurementsApplication.RequestBodies.MeasurementsTypes.MeasurementsTypesRequestBody;
 import org.springframework.stereotype.Component;
 
 @Component

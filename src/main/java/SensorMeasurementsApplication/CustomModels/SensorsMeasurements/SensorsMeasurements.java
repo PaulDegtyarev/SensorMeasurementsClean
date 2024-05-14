@@ -5,5 +5,5 @@ public interface SensorsMeasurements {
 
     Integer getTypeId();
 
-    Integer getTypeFormula();
+    String getTypeFormula();
 }

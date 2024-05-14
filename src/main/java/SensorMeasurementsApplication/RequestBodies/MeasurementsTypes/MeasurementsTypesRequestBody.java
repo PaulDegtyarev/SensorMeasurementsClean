@@ -1,4 +1,4 @@
-package SensorMeasurementsApplication.RequestBodies.MeasurementsTypesRequestBody;
+package SensorMeasurementsApplication.RequestBodies.MeasurementsTypes;
 
 public class MeasurementsTypesRequestBody {
     private String type_name;

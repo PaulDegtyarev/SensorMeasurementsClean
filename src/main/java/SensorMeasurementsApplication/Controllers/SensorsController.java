@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 public class SensorsController {
     @Autowired
-    private final SensorsService sensorsService;
+    private SensorsService sensorsService;
 
     public SensorsController(SensorsService sensorsService) {
         this.sensorsService = sensorsService;

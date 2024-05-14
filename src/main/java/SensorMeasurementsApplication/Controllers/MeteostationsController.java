@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 public class MeteostationsController {
     @Autowired
-    private final MeteostationsService meteostationsService;
+    private MeteostationsService meteostationsService;
 
     public MeteostationsController(MeteostationsService meteostationsService) {
         this.meteostationsService = meteostationsService;
@@ -41,7 +41,7 @@ public class MeteostationsController {
     @GetMapping("/meteostations/{station_id}")
     MeteostationResponseModel one(@PathVariable("station_id") Integer stationId){return meteostationsService.one(stationId);}
 
-    @GetMapping("meteostations/station")
+    @GetMapping("/meteostations/station")
     List<MeteostationResponseModel> byParam(
             @RequestParam(value = "station_name", required = false, defaultValue = "") String stationName,
             @RequestParam(value = "station_longitude", required = false) Double stationLongitude,

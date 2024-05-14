@@ -1,0 +1,11 @@
+package SensorMeasurementsApplication.Services.SensorsMeasurements;
+
+import SensorMeasurementsApplication.RequestBodies.SensorsMeasurements.Delete.SensorsMeasurementsRequestBodyDelete;
+import SensorMeasurementsApplication.RequestBodies.SensorsMeasurements.Post.SensorsMeasurementsRequesBody;
+import SensorMeasurementsApplication.Responses.SensorsMeasurements.SensorsMeasurementsResponseModel;
+
+public interface SensorsMeasurementsService {
+    SensorsMeasurementsResponseModel create(Integer sensorId, SensorsMeasurementsRequesBody data);
+
+    void delete(Integer sensorId, SensorsMeasurementsRequestBodyDelete measurementsType);
+}

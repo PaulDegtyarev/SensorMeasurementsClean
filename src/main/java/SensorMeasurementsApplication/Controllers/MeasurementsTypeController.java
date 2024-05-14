@@ -1,6 +1,6 @@
 package SensorMeasurementsApplication.Controllers;
 
-import SensorMeasurementsApplication.RequestBodies.MeasurementsTypesRequestBody.MeasurementsTypesRequestBody;
+import SensorMeasurementsApplication.RequestBodies.MeasurementsTypes.MeasurementsTypesRequestBody;
 import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelGetAll;
 import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelPost;
 import SensorMeasurementsApplication.Services.MeasurementsTypes.MeasurementsTypeService;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MeasurementsTypeController {
     @Autowired
-    private final MeasurementsTypeService measurementsTypeService;
+    private MeasurementsTypeService measurementsTypeService;
 
     public MeasurementsTypeController(MeasurementsTypeService measurementsTypeService) {
         this.measurementsTypeService = measurementsTypeService;

@@ -1,7 +1,7 @@
 package SensorMeasurementsApplication.DataStores.MeasurementsTypes;
 
 import SensorMeasurementsApplication.JPAEntities.MeasurementsTypeEntity;
-import SensorMeasurementsApplication.RequestBodies.MeasurementsTypesRequestBody.MeasurementsTypesRequestBody;
+import SensorMeasurementsApplication.RequestBodies.MeasurementsTypes.MeasurementsTypesRequestBody;
 import SensorMeasurementsApplication.RequestDataStoreModels.MeasurementsTypes.MeasurementsTypeDSRequestModel;
 
 import java.util.List;

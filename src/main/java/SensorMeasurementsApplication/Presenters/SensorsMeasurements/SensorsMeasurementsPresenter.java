@@ -1,0 +1,7 @@
+package SensorMeasurementsApplication.Presenters.SensorsMeasurements;
+
+import SensorMeasurementsApplication.Responses.SensorsMeasurements.SensorsMeasurementsResponseModel;
+
+public interface SensorsMeasurementsPresenter {
+    SensorsMeasurementsResponseModel prepareSuccessView(SensorsMeasurementsResponseModel response);
+}
