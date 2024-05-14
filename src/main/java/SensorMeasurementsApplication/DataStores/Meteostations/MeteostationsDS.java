@@ -19,6 +19,8 @@ public interface MeteostationsDS {
 
     List<MeteostationsEntity> byParam(MeteostationsDSRequestModel dsRequest);
 
+    MeteostationsEntity withSensors(Integer stationId);
+
     boolean existsByStationNameOrStationLongitudeAndStationLatitude(String stationName,
                                                                     Double stationLongitude,
                                                                     Double stationLatitude);

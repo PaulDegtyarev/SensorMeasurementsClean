@@ -14,9 +14,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static java.lang.System.out;
-import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
-
 @Component
 public class MeteostationsDSImpl implements MeteostationsDS{
     @Autowired
@@ -62,9 +59,7 @@ public class MeteostationsDSImpl implements MeteostationsDS{
     }
 
     @Override
-    public MeteostationsEntity one(Integer stationId){
-        return meteostationsRepository.findById(stationId).orElseThrow(MeteostationsNotFoundException::new);
-    }
+    public MeteostationsEntity one(Integer stationId){return meteostationsRepository.findById(stationId).orElseThrow(MeteostationsNotFoundException::new);}
 
     @Override
     public List<MeteostationsEntity> byParam(MeteostationsDSRequestModel dsRequest){
@@ -74,11 +69,13 @@ public class MeteostationsDSImpl implements MeteostationsDS{
     }
 
     @Override
+    public MeteostationsEntity withSensors(Integer stationId){return meteostationsRepository.findById(stationId).orElseThrow(MeteostationsNotFoundException::new);}
+
+    @Override
     public boolean existsByStationNameOrStationLongitudeAndStationLatitude(String stationName,
                                                                            Double stationLongitude,
-                                                                           Double stationLatitude){
-        return meteostationsRepository.existsByStationNameOrStationLongitudeAndStationLatitude(stationName, stationLongitude, stationLatitude);
-    }
+                                                                           Double stationLatitude)
+    {return meteostationsRepository.existsByStationNameOrStationLongitudeAndStationLatitude(stationName, stationLongitude, stationLatitude);}
 
     @Override
     public boolean existsByStationId(Integer stationId){

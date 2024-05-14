@@ -5,8 +5,6 @@ import SensorMeasurementsApplication.CustomModels.Meteostations.MeteostationImpl
 import SensorMeasurementsApplication.RequestBodies.Meteostations.MeteostationRequestBody;
 import org.springframework.stereotype.Component;
 
-import static java.lang.System.out;
-
 @Component
 public class MeteostationFactoryImpl implements MeteostationFactory {
     @Override
@@ -22,6 +20,6 @@ public class MeteostationFactoryImpl implements MeteostationFactory {
     @Override
     public String checkStringNotNull(String str){
         if (str.isEmpty()) return null;
-        else return str;
+        return str;
     }
 }
