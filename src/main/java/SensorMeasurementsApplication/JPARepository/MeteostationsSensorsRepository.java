@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MeteostationsSensorsRepository extends JpaRepository<MeteostationsSensorsEntity, Integer> {
     boolean existsBySensorId(Integer sensorId);
+
+    boolean existsByStationIdAndSensorId(Integer stationId, Integer sensorId);
 }

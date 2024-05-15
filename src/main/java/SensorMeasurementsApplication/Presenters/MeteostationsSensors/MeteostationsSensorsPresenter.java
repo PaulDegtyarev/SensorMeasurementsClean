@@ -1,0 +1,10 @@
+package SensorMeasurementsApplication.Presenters.MeteostationsSensors;
+
+import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsConflictException;
+import SensorMeasurementsApplication.Responses.MeteostationsSensors.Post.MeteostationsSensorsPostResponse;
+
+public interface MeteostationsSensorsPresenter {
+    MeteostationsSensorsPostResponse prepareSuccessPostView(MeteostationsSensorsPostResponse response);
+
+    MeteostationsSensorsConflictException prepareConflictView();
+}

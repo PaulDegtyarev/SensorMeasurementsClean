@@ -29,12 +29,10 @@ public class MeteostationsSensorsEntity {
     private Set<MeasurementsEntity> measurement;
 
 
-    public MeteostationsSensorsEntity(Integer sensorInventoryNumber, Integer stationId, Integer sensorId, Instant addedTS, Timestamp removedTS) {
-        SensorInventoryNumber = sensorInventoryNumber;
+    public MeteostationsSensorsEntity(Integer stationId, Integer sensorId, Instant addedTS) {
         this.stationId = stationId;
         this.sensorId = sensorId;
         this.addedTS = addedTS;
-        this.removedTS = removedTS;
     }
 
     public MeteostationsSensorsEntity(){}

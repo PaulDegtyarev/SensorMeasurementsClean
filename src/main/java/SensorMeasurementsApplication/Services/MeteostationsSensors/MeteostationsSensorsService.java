@@ -1,0 +1,8 @@
+package SensorMeasurementsApplication.Services.MeteostationsSensors;
+
+import SensorMeasurementsApplication.RequestBodies.MeteostationsSensors.MeteostationsSensorsRequestBody;
+import SensorMeasurementsApplication.Responses.MeteostationsSensors.Post.MeteostationsSensorsPostResponse;
+
+public interface MeteostationsSensorsService {
+    MeteostationsSensorsPostResponse create(MeteostationsSensorsRequestBody data);
+}
