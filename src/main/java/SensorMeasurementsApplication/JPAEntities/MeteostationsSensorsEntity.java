@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "meteostations_sensors", schema = "public")
 public class MeteostationsSensorsEntity {
-    @Column(name = "sensor_inventory_number") @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer SensorInventoryNumber;
+    @Column(name = "sensor_inventory_number") @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer sensorInventoryNumber;
     @Column(name = "station_id") private Integer stationId;
     @Column(name = "sensor_id") private Integer sensorId;
     @Column(name = "added_ts") @CreationTimestamp private Instant addedTS;
@@ -38,11 +38,11 @@ public class MeteostationsSensorsEntity {
     public MeteostationsSensorsEntity(){}
 
     public Integer getSensorInventoryNumber() {
-        return SensorInventoryNumber;
+        return sensorInventoryNumber;
     }
 
     public void setSensorInventoryNumber(Integer sensorInventoryNumber) {
-        SensorInventoryNumber = sensorInventoryNumber;
+        this.sensorInventoryNumber = sensorInventoryNumber;
     }
 
     public Integer getStationId() {

@@ -1,10 +1,14 @@
 package SensorMeasurementsApplication.Factories.MeteostationsSensors;
 
+import SensorMeasurementsApplication.CustomModels.MeteostationsSensors.Delete.MeteostationsSensorsDelete;
 import SensorMeasurementsApplication.CustomModels.MeteostationsSensors.MeteostationsSensors;
-import SensorMeasurementsApplication.RequestBodies.MeteostationsSensors.MeteostationsSensorsRequestBody;
+import SensorMeasurementsApplication.RequestBodies.MeteostationsSensors.Delete.MeteostationsSensorsDeleteRequestBody;
+import SensorMeasurementsApplication.RequestBodies.MeteostationsSensors.Post.MeteostationsSensorsRequestBody;
 
 import java.util.List;
 
 public interface MeteostationsSensorsFactory {
     List<MeteostationsSensors> create(MeteostationsSensorsRequestBody data);
+
+    MeteostationsSensorsDelete createForDelete(Integer sensorInventoryNumber, MeteostationsSensorsDeleteRequestBody data);
 }

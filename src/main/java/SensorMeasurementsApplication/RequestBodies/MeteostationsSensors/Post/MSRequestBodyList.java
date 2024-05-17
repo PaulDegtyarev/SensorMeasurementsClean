@@ -1,4 +1,4 @@
-package SensorMeasurementsApplication.RequestBodies.MeteostationsSensors;
+package SensorMeasurementsApplication.RequestBodies.MeteostationsSensors.Post;
 
 import java.time.Instant;
 

@@ -1,10 +1,16 @@
 package SensorMeasurementsApplication.Presenters.MeteostationsSensors;
 
 import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsConflictException;
+import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsNotFoundException;
+import SensorMeasurementsApplication.Responses.MeteostationsSensors.Get.MeteostationsSensorsGetResponseModel;
 import SensorMeasurementsApplication.Responses.MeteostationsSensors.Post.MeteostationsSensorsPostResponse;
 
 public interface MeteostationsSensorsPresenter {
     MeteostationsSensorsPostResponse prepareSuccessPostView(MeteostationsSensorsPostResponse response);
 
     MeteostationsSensorsConflictException prepareConflictView();
+
+    MeteostationsSensorsGetResponseModel prepareSuccsessGetView(MeteostationsSensorsGetResponseModel response);
+
+    MeteostationsSensorsNotFoundException prepareNotFoundView();
 }

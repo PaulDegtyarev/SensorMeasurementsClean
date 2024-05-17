@@ -9,4 +9,6 @@ public interface MeteostationsSensorsRepository extends JpaRepository<Meteostati
     boolean existsBySensorId(Integer sensorId);
 
     boolean existsByStationIdAndSensorId(Integer stationId, Integer sensorId);
+
+    boolean existsBySensorInventoryNumber(Integer sensorInventoryNumber);
 }

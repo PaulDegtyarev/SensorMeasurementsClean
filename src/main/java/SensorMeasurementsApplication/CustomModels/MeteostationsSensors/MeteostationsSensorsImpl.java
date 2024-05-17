@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 public class MeteostationsSensorsImpl implements MeteostationsSensors{
-    private Integer stationId;
-    private Integer sensorId;
-    private Instant addedTS;
+        private Integer stationId;
+        private Integer sensorId;
+        private Instant addedTS;
 
 
     public MeteostationsSensorsImpl(Integer stationId, Integer sensorId, Instant addedTS) {
@@ -14,8 +14,6 @@ public class MeteostationsSensorsImpl implements MeteostationsSensors{
         this.sensorId = sensorId;
         this.addedTS = addedTS;
     }
-
-    public MeteostationsSensorsImpl(){}
 
     @Override
     public Integer getStationId() {

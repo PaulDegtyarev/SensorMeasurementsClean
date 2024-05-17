@@ -1,9 +1,13 @@
 package SensorMeasurementsApplication.DataStores.MeteostationsSensors;
 
 import SensorMeasurementsApplication.CustomModels.MeteostationsSensors.MeteostationsSensors;
+import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsNotFoundException;
+import SensorMeasurementsApplication.JPAEntities.MeteostationsEntity;
 import SensorMeasurementsApplication.JPAEntities.MeteostationsSensorsEntity;
+import SensorMeasurementsApplication.JPARepository.MeteostationsRepository;
 import SensorMeasurementsApplication.JPARepository.MeteostationsSensorsRepository;
 import SensorMeasurementsApplication.RequestDataStoreModels.MeteostationsSensors.MeteostationsSensorsDSRequestModel;
+import SensorMeasurementsApplication.RequestDataStoreModels.MeteostationsSensors.MeteostationsSensorsDSRequestModelForDelete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +18,11 @@ import java.util.List;
 public class MeteostationsSensorsDSImpl implements MeteostationsSensorsDS {
     @Autowired
     private MeteostationsSensorsRepository meteostationsSensorsRepository;
+    private MeteostationsRepository meteostationsRepository;
 
-    public MeteostationsSensorsDSImpl(MeteostationsSensorsRepository meteostationsSensorsRepository) {
+    public MeteostationsSensorsDSImpl(MeteostationsSensorsRepository meteostationsSensorsRepository, MeteostationsRepository meteostationsRepository) {
         this.meteostationsSensorsRepository = meteostationsSensorsRepository;
+        this.meteostationsRepository = meteostationsRepository;
     }
 
     @Override
@@ -33,7 +39,22 @@ public class MeteostationsSensorsDSImpl implements MeteostationsSensorsDS {
     }
 
     @Override
+    public void delete(MeteostationsSensorsDSRequestModelForDelete dsRequest){
+        MeteostationsSensorsEntity meteostationsSensors = meteostationsSensorsRepository.findById(dsRequest.getSensorInventoryNumber()).orElseThrow(MeteostationsSensorsNotFoundException::new);
+        meteostationsSensors.setRemovedTS(dsRequest.getRemovedTS());
+        meteostationsSensorsRepository.save(meteostationsSensors);
+    }
+
+    @Override
+    public List<MeteostationsSensorsEntity> get(){
+        return meteostationsSensorsRepository.findAll();
+    }
+
+    @Override
     public boolean existsByStationIdAndSensorId(Integer stationId, Integer sensorId){
         return meteostationsSensorsRepository.existsByStationIdAndSensorId(stationId, sensorId);
     }
+
+    @Override
+    public boolean existsBySensorInventoryNumber(Integer sensorInventoryNumber){return meteostationsSensorsRepository.existsBySensorInventoryNumber(sensorInventoryNumber);}
 }
