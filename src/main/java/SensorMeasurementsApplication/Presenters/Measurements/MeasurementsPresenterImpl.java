@@ -1,5 +1,6 @@
 package SensorMeasurementsApplication.Presenters.Measurements;
 
+import SensorMeasurementsApplication.Exceptions.Measurements.MeasurementsNotFoundException;
 import SensorMeasurementsApplication.Responses.Measurements.Post.MeasurementsPostResponseModel;
 import org.springframework.stereotype.Component;
 
@@ -7,4 +8,8 @@ import org.springframework.stereotype.Component;
 public class MeasurementsPresenterImpl implements MeasurementsPresenter{
     @Override
     public MeasurementsPostResponseModel prepareSuccessPostView(MeasurementsPostResponseModel response){return response;}
+
+    @Override
+    public MeasurementsNotFoundException prepareNotFoundView(){throw new MeasurementsNotFoundException();}
+
 }

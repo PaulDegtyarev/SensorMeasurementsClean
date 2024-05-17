@@ -2,55 +2,78 @@ package SensorMeasurementsApplication.Services.Measurements;
 
 import SensorMeasurementsApplication.CustomModels.Measurements.Measurements;
 import SensorMeasurementsApplication.DataStores.Measurements.MeasurementsDS;
-import SensorMeasurementsApplication.DataStores.MeasurementsTypes.MeasurementsTypeDS;
-import SensorMeasurementsApplication.DataStores.MeteostationsSensors.MeteostationsSensorsDS;
 import SensorMeasurementsApplication.Factories.Measurements.MeasurementsFactory;
 import SensorMeasurementsApplication.JPAEntities.Measurements.MeasurementsEntity;
 import SensorMeasurementsApplication.Presenters.Measurements.MeasurementsPresenter;
-import SensorMeasurementsApplication.Presenters.MeasurementsTypes.MeasurementsTypePresenter;
-import SensorMeasurementsApplication.Presenters.MeteostationsSensors.MeteostationsSensorsPresenter;
 import SensorMeasurementsApplication.RequestBodies.Measurements.MeasurementsRequestBody;
+import SensorMeasurementsApplication.RequestBodies.Measurements.MeasurementsRequestBodyList;
 import SensorMeasurementsApplication.RequestDataStoreModels.Measurements.MeasurementsDSRequesModel;
+import SensorMeasurementsApplication.Responses.Measurements.Post.MeasurementsPostResponseList;
 import SensorMeasurementsApplication.Responses.Measurements.Post.MeasurementsPostResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.lang.System.out;
 
 @Service
 public class MeasurementsServiceImpl implements MeasurementsService {
     @Autowired
     private MeasurementsDS measurementsDS;
-    private MeasurementsTypeDS measurementsTypeDS;
-    private MeteostationsSensorsDS meteostationsSensorsDS;
-
     private MeasurementsPresenter measurementsPresenter;
-    private MeasurementsTypePresenter measurementsTypePresenter;
-    private MeteostationsSensorsPresenter meteostationsSensorsPresenter;
 
     private MeasurementsFactory measurementsFactory;
 
-    public MeasurementsServiceImpl(MeasurementsDS measurementsDS, MeasurementsTypeDS measurementsTypeDS, MeteostationsSensorsDS meteostationsSensorsDS, MeasurementsPresenter measurementsPresenter, MeasurementsTypePresenter measurementsTypePresenter, MeteostationsSensorsPresenter meteostationsSensorsPresenter, MeasurementsFactory measurementsFactory) {
+    public MeasurementsServiceImpl(MeasurementsDS measurementsDS, MeasurementsPresenter measurementsPresenter, MeasurementsFactory measurementsFactory) {
         this.measurementsDS = measurementsDS;
-        this.measurementsTypeDS = measurementsTypeDS;
-        this.meteostationsSensorsDS = meteostationsSensorsDS;
         this.measurementsPresenter = measurementsPresenter;
-        this.measurementsTypePresenter = measurementsTypePresenter;
-        this.meteostationsSensorsPresenter = meteostationsSensorsPresenter;
         this.measurementsFactory = measurementsFactory;
     }
 
     @Override
-    public MeasurementsPostResponseModel create(MeasurementsRequestBody data){
-        if (!measurementsTypeDS.existsByTypeId(data.getMeasurement_type())) throw measurementsTypePresenter.prepareMeasurementsTypeNotFoundView();
-        if (!meteostationsSensorsDS.existsBySensorInventoryNumber(data.getSensor_inventory_number())) throw meteostationsSensorsPresenter.prepareNotFoundView();
+    public MeasurementsPostResponseModel create(MeasurementsRequestBodyList data){
+        for (MeasurementsRequestBody el : data.getMeasurements()) {
+            if (!measurementsDS.existsByTypeId(el.getMeasurement_type())) throw measurementsPresenter.prepareNotFoundView();
+            if (!measurementsDS.existsBySensorInventoryNumber(el.getSensor_inventory_number())) throw measurementsPresenter.prepareNotFoundView();
+        }
 
-        Measurements measurement = measurementsFactory.create(data);
+        List<Measurements> measurements = measurementsFactory.create(data);
 
-        MeasurementsDSRequesModel dsRequest = new MeasurementsDSRequesModel(measurement.getMeasurementsValue(), measurement.getMeasurementTS(), measurement.getSensorInventoryNumber(), measurement.getMeasurementType());
+        MeasurementsDSRequesModel dsRequest = new MeasurementsDSRequesModel(measurements);
 
-        MeasurementsEntity dsResponse = measurementsDS.create(dsRequest);
+        List<MeasurementsEntity> dsResponse = measurementsDS.create(dsRequest);
 
-        MeasurementsPostResponseModel response = new MeasurementsPostResponseModel(dsResponse.getMeasurementsKey().getMeasurementValue(), dsResponse.getMeasurementsKey().getMeasurementTS(), dsResponse.getMeasurementsKey().getSensorInventoryNumber(), dsResponse.getMeasurementsKey().getMeasurementType());
-
-        return measurementsPresenter.prepareSuccessPostView(response);
+        return measurementsPresenter.prepareSuccessPostView(makePostResponse(dsResponse));
     }
+
+    @Override
+    public MeasurementsPostResponseModel byParam(Integer sensorInventoryNumber){
+        if (!measurementsDS.existsByMeasurementsKey_SensorInventoryNumber(sensorInventoryNumber)) throw measurementsPresenter.prepareNotFoundView();
+
+        List<MeasurementsEntity> dsResponse = measurementsDS.getByParam(sensorInventoryNumber);
+
+        return measurementsPresenter.prepareSuccessPostView(makePostResponse(dsResponse));
+
+    }
+
+    @Override
+    public MeasurementsPostResponseModel all(){
+        List<MeasurementsEntity> dsResponse = measurementsDS.all();
+
+        return measurementsPresenter.prepareSuccessPostView(makePostResponse(dsResponse));
+    }
+
+    private MeasurementsPostResponseModel makePostResponse(List<MeasurementsEntity> dsResponse){
+        List<MeasurementsPostResponseList> measurements = new ArrayList<>();
+
+        for (MeasurementsEntity el : dsResponse){
+            MeasurementsPostResponseList model = new MeasurementsPostResponseList(el.getMeasurementsKey().getMeasurementValue(), el.getMeasurementsKey().getMeasurementTS(), el.getMeasurementsKey().getSensorInventoryNumber(), el.getMeasurementsKey().getMeasurementType());
+            measurements.add(model);
+        }
+
+        return new MeasurementsPostResponseModel(measurements);
+    }
+
 }
