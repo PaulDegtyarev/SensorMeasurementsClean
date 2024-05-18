@@ -1,5 +1,7 @@
 package SensorMeasurementsApplication.Presenters.MeasurementsTypes;
 
+import SensorMeasurementsApplication.Exceptions.Measurements.MeasurementsBadRequestException;
+import SensorMeasurementsApplication.Exceptions.MeasurementsTypes.MeasurementsTypeBadRequestException;
 import SensorMeasurementsApplication.Exceptions.MeasurementsTypes.MeasurementsTypeConflictException;
 import SensorMeasurementsApplication.Exceptions.MeasurementsTypes.MeasurementsTypeNotFoundException;
 import SensorMeasurementsApplication.Responses.MeasurementsTypes.MeasurementsTypeResponseModelGetAll;
@@ -16,6 +18,9 @@ public class MeasurementsTypePresenterImpl implements MeasurementsTypePresenter 
 
     @Override
     public MeasurementsTypeNotFoundException prepareMeasurementsTypeNotFoundView(){throw new MeasurementsTypeNotFoundException();}
+
+    @Override
+    public MeasurementsTypeBadRequestException prepareMeasurementsTypeBadRequestView(){throw new MeasurementsBadRequestException();}
 
     @Override
     public MeasurementsTypeResponseModelGetAll prepareSuccessGetAllView(MeasurementsTypeResponseModelGetAll response){return response;}

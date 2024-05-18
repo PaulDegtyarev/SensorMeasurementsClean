@@ -1,12 +1,14 @@
 package SensorMeasurementsApplication.CustomModels.Measurements;
 
+import java.sql.Timestamp;
+
 public class MeasurementsImpl implements Measurements{
     private Float measurementsValue;
-    private String measurementTS;
+    private Timestamp measurementTS;
     private Integer sensorInventoryNumber;
     private Integer measurementType;
 
-    public MeasurementsImpl(Float measurementsValue, String measurementTS, Integer sensorInventoryNumber, Integer measurementType) {
+    public MeasurementsImpl(Float measurementsValue, Timestamp measurementTS, Integer sensorInventoryNumber, Integer measurementType) {
         this.measurementsValue = measurementsValue;
         this.measurementTS = measurementTS;
         this.sensorInventoryNumber = sensorInventoryNumber;
@@ -23,11 +25,11 @@ public class MeasurementsImpl implements Measurements{
     }
 
     @Override
-    public String getMeasurementTS() {
+    public Timestamp getMeasurementTS() {
         return measurementTS;
     }
 
-    public void setMeasurementTS(String measurementTS) {
+    public void setMeasurementTS(Timestamp measurementTS) {
         this.measurementTS = measurementTS;
     }
 

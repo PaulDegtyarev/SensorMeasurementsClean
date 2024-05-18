@@ -9,5 +9,5 @@ import org.springframework.web.server.ResponseStatusException;
 
 @ResponseStatus(reason = "Sensor has measurements")
 public class SensorsHasMeasurementsException extends ResponseStatusException {
-    public SensorsHasMeasurementsException(String message){super(HttpStatus.OK, message);}
+    public SensorsHasMeasurementsException(String message){super(HttpStatus.CONFLICT, message);}
 }

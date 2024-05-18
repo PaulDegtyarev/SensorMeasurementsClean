@@ -1,8 +1,9 @@
 package SensorMeasurementsApplication.Services.Measurements;
 
-import SensorMeasurementsApplication.RequestBodies.Measurements.MeasurementsRequestBody;
 import SensorMeasurementsApplication.RequestBodies.Measurements.MeasurementsRequestBodyList;
 import SensorMeasurementsApplication.Responses.Measurements.Post.MeasurementsPostResponseModel;
+
+import java.util.Optional;
 
 public interface MeasurementsService {
 
@@ -11,4 +12,10 @@ public interface MeasurementsService {
     MeasurementsPostResponseModel byParam(Integer sensorInventoryNumber);
 
     MeasurementsPostResponseModel all();
+
+    void deleteByTime(String from, String to);
+
+    void deleteByStationId(Integer stationId);
+
+    void deleteBySensorId(Integer sensorId);
 }

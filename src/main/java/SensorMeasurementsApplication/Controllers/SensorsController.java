@@ -9,6 +9,9 @@ import SensorMeasurementsApplication.Responses.Sensors.GetTypes.SensorsResponseM
 import SensorMeasurementsApplication.Responses.Sensors.Post.SensorsResponseModelPost;
 import SensorMeasurementsApplication.Services.Sensors.SensorsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +27,8 @@ public class SensorsController {
     }
 
     @PostMapping("/sensor")
-    @Transactional
-    SensorsResponseModelPost create(@RequestBody SensorsPostRequestBody data){
-        return sensorsService.create(data);
-    }
+    @Transactional()
+    ResponseEntity<SensorsResponseModelPost> create(@RequestBody SensorsPostRequestBody data){return new ResponseEntity<>(sensorsService.create(data), HttpStatus.CREATED);}
 
     @DeleteMapping("/sensor/{sensor_id}")
     void delete(@PathVariable("sensor_id") Integer sensorId){

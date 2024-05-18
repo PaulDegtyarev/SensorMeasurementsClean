@@ -1,12 +1,14 @@
 package SensorMeasurementsApplication.RequestBodies.Measurements;
 
+import java.sql.Timestamp;
+
 public class MeasurementsRequestBody {
     private Float measurement_value;
     private Integer measurement_type;
-    private String measurement_ts;
+    private Timestamp measurement_ts;
     private Integer sensor_inventory_number;
 
-    public MeasurementsRequestBody(Float measurement_value, Integer measurement_type, String measurement_ts, Integer sensor_inventory_number) {
+    public MeasurementsRequestBody(Float measurement_value, Integer measurement_type, Timestamp measurement_ts, Integer sensor_inventory_number) {
         this.measurement_value = measurement_value;
         this.measurement_type = measurement_type;
         this.measurement_ts = measurement_ts;
@@ -29,11 +31,11 @@ public class MeasurementsRequestBody {
         this.measurement_type = measurement_type;
     }
 
-    public String getMeasurement_ts() {
+    public Timestamp getMeasurement_ts() {
         return measurement_ts;
     }
 
-    public void setMeasurement_ts(String measurement_ts) {
+    public void setMeasurement_ts(Timestamp measurement_ts) {
         this.measurement_ts = measurement_ts;
     }
 

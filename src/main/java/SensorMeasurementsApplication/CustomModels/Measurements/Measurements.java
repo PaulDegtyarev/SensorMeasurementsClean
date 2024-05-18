@@ -1,9 +1,12 @@
 package SensorMeasurementsApplication.CustomModels.Measurements;
 
+import java.sql.Timestamp;
+
 public interface Measurements {
+
     Float getMeasurementsValue();
 
-    String getMeasurementTS();
+    Timestamp getMeasurementTS();
 
     Integer getSensorInventoryNumber();
 

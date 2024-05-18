@@ -31,6 +31,7 @@ public class MeasurementsTypeServiceImpl implements MeasurementsTypeService{
     @Override
     public MeasurementsTypeResponseModelPost create(MeasurementsTypesRequestBody data){
         if (measurementsTypeDS.existsByTypeName(data.getType_name())) throw measurementsTypePresenter.prepareMeasurementsTypeConflictView();
+        if (data.getType_name().length() > 31 || data.getType_units().length() > 4) throw measurementsTypePresenter.prepareMeasurementsTypeBadRequestView();
 
         MeasurementsType measurementsType = measurementsTypeFactory.create(data);
 
@@ -51,6 +52,8 @@ public class MeasurementsTypeServiceImpl implements MeasurementsTypeService{
     @Override
     public void update(Integer typeId, MeasurementsTypesRequestBody data){
         if (!measurementsTypeDS.existsByTypeId(typeId)) throw measurementsTypePresenter.prepareMeasurementsTypeNotFoundView();
+        if (data.getType_name().length() > 31 || data.getType_units().length() > 4) throw measurementsTypePresenter.prepareMeasurementsTypeBadRequestView();
+
         measurementsTypeDS.update(typeId, data);
     }
 

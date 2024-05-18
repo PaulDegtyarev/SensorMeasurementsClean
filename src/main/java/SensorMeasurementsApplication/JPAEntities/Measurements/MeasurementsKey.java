@@ -3,14 +3,16 @@ package SensorMeasurementsApplication.JPAEntities.Measurements;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
+import java.sql.Timestamp;
+
 @Embeddable
 public class MeasurementsKey {
     @Column(name = "measurement_value") private Float measurementValue;
     @Column(name = "measurement_type") private Integer measurementType;
-    @Column(name = "measurement_ts") private String measurementTS;
+    @Column(name = "measurement_ts") private Timestamp measurementTS;
     @Column(name = "sensor_inventory_number") private Integer sensorInventoryNumber;
 
-    public MeasurementsKey(Float measurementValue, Integer measurementType, String measurementTS, Integer sensorInventoryNumber) {
+    public MeasurementsKey(Float measurementValue, Integer measurementType, Timestamp measurementTS, Integer sensorInventoryNumber) {
         this.measurementValue = measurementValue;
         this.measurementType = measurementType;
         this.measurementTS = measurementTS;
@@ -35,11 +37,11 @@ public class MeasurementsKey {
         this.measurementType = measurementType;
     }
 
-    public String getMeasurementTS() {
+    public Timestamp getMeasurementTS() {
         return measurementTS;
     }
 
-    public void setMeasurementTS(String measurementTS) {
+    public void setMeasurementTS(Timestamp measurementTS) {
         this.measurementTS = measurementTS;
     }
 

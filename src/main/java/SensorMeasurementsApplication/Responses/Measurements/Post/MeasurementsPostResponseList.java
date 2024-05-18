@@ -1,12 +1,14 @@
 package SensorMeasurementsApplication.Responses.Measurements.Post;
 
+import java.sql.Timestamp;
+
 public class MeasurementsPostResponseList {
     private Float measurement_value;
-    private String measurement_ts;
+    private Timestamp measurement_ts;
     private Integer sensor_inventory_number;
     private Integer measurement_type;
 
-    public MeasurementsPostResponseList(Float measurement_value, String measurement_ts, Integer sensor_inventory_number, Integer measurement_type) {
+    public MeasurementsPostResponseList(Float measurement_value, Timestamp measurement_ts, Integer sensor_inventory_number, Integer measurement_type) {
         this.measurement_value = measurement_value;
         this.measurement_ts = measurement_ts;
         this.sensor_inventory_number = sensor_inventory_number;
@@ -21,11 +23,11 @@ public class MeasurementsPostResponseList {
         this.measurement_value = measurement_value;
     }
 
-    public String getMeasurement_ts() {
+    public Timestamp getMeasurement_ts() {
         return measurement_ts;
     }
 
-    public void setMeasurement_ts(String measurement_ts) {
+    public void setMeasurement_ts(Timestamp measurement_ts) {
         this.measurement_ts = measurement_ts;
     }
 
