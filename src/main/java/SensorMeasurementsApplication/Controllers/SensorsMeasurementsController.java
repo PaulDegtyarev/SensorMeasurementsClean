@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SensorsMeasurementsController {
-    @Autowired
     private SensorsMeasurementsService sensorsMeasurementsService;
 
+    @Autowired
     public SensorsMeasurementsController(SensorsMeasurementsService sensorsMeasurementsService) {
         this.sensorsMeasurementsService = sensorsMeasurementsService;
     }

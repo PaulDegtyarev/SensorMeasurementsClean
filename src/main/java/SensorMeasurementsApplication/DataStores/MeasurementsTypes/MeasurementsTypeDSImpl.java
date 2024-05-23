@@ -12,9 +12,9 @@ import java.util.List;
 
 @Component
 public class MeasurementsTypeDSImpl implements MeasurementsTypeDS {
-    @Autowired
-    private final MeasurementsTypeRepository measurementsTypeRepository;
+    private MeasurementsTypeRepository measurementsTypeRepository;
 
+    @Autowired
     public MeasurementsTypeDSImpl(MeasurementsTypeRepository measurementsTypeRepository) {
         this.measurementsTypeRepository = measurementsTypeRepository;
     }

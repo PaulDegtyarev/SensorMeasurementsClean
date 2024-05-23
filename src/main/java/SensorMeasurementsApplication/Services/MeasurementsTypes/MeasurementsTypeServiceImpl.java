@@ -17,11 +17,11 @@ import java.util.List;
 
 @Service
 public class MeasurementsTypeServiceImpl implements MeasurementsTypeService{
-    @Autowired
-    private final MeasurementsTypeDS measurementsTypeDS;
-    private final MeasurementsTypeFactory measurementsTypeFactory;
-    private final MeasurementsTypePresenter measurementsTypePresenter;
+    private MeasurementsTypeDS measurementsTypeDS;
+    private MeasurementsTypeFactory measurementsTypeFactory;
+    private MeasurementsTypePresenter measurementsTypePresenter;
 
+    @Autowired
     public MeasurementsTypeServiceImpl(MeasurementsTypeDS measurementsTypeDS, MeasurementsTypeFactory measurementsTypeFactory, MeasurementsTypePresenter measurementsTypePresenter) {
         this.measurementsTypeDS = measurementsTypeDS;
         this.measurementsTypeFactory = measurementsTypeFactory;

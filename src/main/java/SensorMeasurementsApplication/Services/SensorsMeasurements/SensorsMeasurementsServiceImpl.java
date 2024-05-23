@@ -25,33 +25,24 @@ import static java.lang.System.out;
 
 @Service
 public class SensorsMeasurementsServiceImpl implements SensorsMeasurementsService {
-    @Autowired
     private SensorsMeasurementsDS sensorsMeasurementsDS;
-    private SensorsDS sensorsDS;
-    private MeasurementsTypeDS measurementsTypeDS;
-
     private SensorsMeasurementsPresenter sensorsMeasurementsPresenter;
-    private SensorsPresenter sensorsPresenter;
-    private MeasurementsTypePresenter measurementsTypePresenter;
+    private SensorsMeasurementsFactory sensorsMeasurementsFactory;
 
-    private final SensorsMeasurementsFactory sensorsMeasurementsFactory;
-
-    public SensorsMeasurementsServiceImpl(SensorsMeasurementsDS sensorsMeasurementsDS, SensorsDS sensorsDS, MeasurementsTypeDS measurementsTypeDS, SensorsMeasurementsPresenter sensorsMeasurementsPresenter, SensorsPresenter sensorsPresenter, MeasurementsTypePresenter measurementsTypePresenter, SensorsMeasurementsFactory sensorsMeasurementsFactory) {
+    @Autowired
+    public SensorsMeasurementsServiceImpl(SensorsMeasurementsDS sensorsMeasurementsDS, SensorsMeasurementsPresenter sensorsMeasurementsPresenter, SensorsMeasurementsFactory sensorsMeasurementsFactory) {
         this.sensorsMeasurementsDS = sensorsMeasurementsDS;
-        this.sensorsDS = sensorsDS;
-        this.measurementsTypeDS = measurementsTypeDS;
         this.sensorsMeasurementsPresenter = sensorsMeasurementsPresenter;
-        this.sensorsPresenter = sensorsPresenter;
-        this.measurementsTypePresenter = measurementsTypePresenter;
         this.sensorsMeasurementsFactory = sensorsMeasurementsFactory;
     }
 
+
     @Override
     public SensorsMeasurementsResponseModel create(Integer sensorId, SensorsMeasurementsRequesBody data){
-        if (sensorsDS.existsBySensorId(sensorId)) throw sensorsPresenter.prepareSensorsNotFoundView();
+        if (!sensorsMeasurementsDS.existsBySensorId(sensorId)) throw sensorsMeasurementsPresenter.prepareSensorNotFoundView();
 
         for (SensorsMeasurementsRequesBodyList el : data.getSensors_measurements()){
-            if (!sensorsDS.existsByTypeId(el.getType_id())) throw measurementsTypePresenter.prepareMeasurementsTypeNotFoundView();
+            if (!sensorsMeasurementsDS.existsByTypeId(el.getType_id())) throw sensorsMeasurementsPresenter.prepareTypeNotFoundView();
         }
 
         List<SensorsMeasurements> sensorsMeasurements = sensorsMeasurementsFactory.create(sensorId, data);
@@ -65,10 +56,10 @@ public class SensorsMeasurementsServiceImpl implements SensorsMeasurementsServic
 
     @Override
     public void delete(Integer sensorId, SensorsMeasurementsRequestBodyDelete measurementsType){
-        if (sensorsDS.existsBySensorId(sensorId)) throw sensorsPresenter.prepareSensorsNotFoundView();
+        if (sensorsMeasurementsDS.existsBySensorId(sensorId)) throw sensorsMeasurementsPresenter.prepareSensorNotFoundView();
 
         for (Integer typeId : measurementsType.getMeasurements_type()){
-            if (!measurementsTypeDS.existsByTypeId(typeId)) throw measurementsTypePresenter.prepareMeasurementsTypeNotFoundView();
+            if (!sensorsMeasurementsDS.existsByTypeId(typeId)) throw sensorsMeasurementsPresenter.prepareTypeNotFoundView();
         }
 
         sensorsMeasurementsDS.delete(sensorId, measurementsType);

@@ -23,13 +23,13 @@ import static java.lang.System.out;
 
 @Component
 public class MeasurementsDSImpl implements MeasurementsDS{
-    @Autowired
     private MeasurementsRepository measurementsRepository;
     private MeasurementsTypeRepository measurementsTypeRepository;
     private MeteostationsSensorsRepository meteostationsSensorsRepository;
     private MeteostationsRepository meteostationsRepository;
     private SensorsRepository sensorsRepository;
 
+    @Autowired
     public MeasurementsDSImpl(MeasurementsRepository measurementsRepository, MeasurementsTypeRepository measurementsTypeRepository, MeteostationsSensorsRepository meteostationsSensorsRepository, MeteostationsRepository meteostationsRepository, SensorsRepository sensorsRepository) {
         this.measurementsRepository = measurementsRepository;
         this.measurementsTypeRepository = measurementsTypeRepository;

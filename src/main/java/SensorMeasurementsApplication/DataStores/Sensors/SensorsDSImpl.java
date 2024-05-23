@@ -21,11 +21,11 @@ import java.util.List;
 
 @Component
 public class SensorsDSImpl implements SensorsDS{
-    @Autowired
-    private final SensorsRepository sensorsRepository;
-    private final SensorsMeasurementsRepository sensorsMeasurementsRepository;
-    private final MeasurementsTypeRepository measurementsTypeRepository;
+    private SensorsRepository sensorsRepository;
+    private SensorsMeasurementsRepository sensorsMeasurementsRepository;
+    private MeasurementsTypeRepository measurementsTypeRepository;
 
+    @Autowired
     public SensorsDSImpl(SensorsRepository sensorsRepository, SensorsMeasurementsRepository sensorsMeasurementsRepository, MeasurementsTypeRepository measurementsTypeRepository) {
         this.sensorsRepository = sensorsRepository;
         this.sensorsMeasurementsRepository = sensorsMeasurementsRepository;

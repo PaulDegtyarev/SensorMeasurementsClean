@@ -16,9 +16,9 @@ import static java.lang.System.out;
 
 @RestController
 public class MeasurementsController {
-    @Autowired
     private MeasurementsService measurementsService;
 
+    @Autowired
     public MeasurementsController(MeasurementsService measurementsService) {
         this.measurementsService = measurementsService;
     }

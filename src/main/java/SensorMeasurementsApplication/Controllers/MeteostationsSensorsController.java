@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MeteostationsSensorsController {
-    @Autowired
     private MeteostationsSensorsService meteostationsSensorsService;
 
+    @Autowired
     public MeteostationsSensorsController(MeteostationsSensorsService meteostationsSensorsService) {
         this.meteostationsSensorsService = meteostationsSensorsService;
     }

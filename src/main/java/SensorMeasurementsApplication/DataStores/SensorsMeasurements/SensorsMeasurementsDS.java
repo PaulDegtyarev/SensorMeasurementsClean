@@ -10,4 +10,8 @@ public interface SensorsMeasurementsDS {
     List<SensorsMeasurementsEntity> create(SensorsMeasurementsDSRequestModel dsRequest);
 
     void delete(Integer sensorId, SensorsMeasurementsRequestBodyDelete measurementsType);
+
+    boolean existsBySensorId(Integer sensorId);
+
+    boolean existsByTypeId(Integer typeId);
 }

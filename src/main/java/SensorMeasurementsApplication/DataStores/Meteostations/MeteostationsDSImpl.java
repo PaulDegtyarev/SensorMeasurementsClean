@@ -16,10 +16,10 @@ import java.util.List;
 
 @Component
 public class MeteostationsDSImpl implements MeteostationsDS{
-    @Autowired
-    private final MeteostationsRepository meteostationsRepository;
-    private final MeteostationsSensorsRepository meteostationsSensorsRepository;
+    private MeteostationsRepository meteostationsRepository;
+    private MeteostationsSensorsRepository meteostationsSensorsRepository;
 
+    @Autowired
     public MeteostationsDSImpl(MeteostationsRepository meteostationsRepository, MeteostationsSensorsRepository meteostationsSensorsRepository) {
         this.meteostationsRepository = meteostationsRepository;
         this.meteostationsSensorsRepository = meteostationsSensorsRepository;

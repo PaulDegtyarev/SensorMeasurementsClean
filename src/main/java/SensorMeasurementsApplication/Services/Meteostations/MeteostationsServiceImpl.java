@@ -19,11 +19,11 @@ import java.util.List;
 
 @Service
 public class MeteostationsServiceImpl implements MeteostationsService {
-    @Autowired
-    private final MeteostationsDS meteostationsDS;
-    private final MeteostationFactory meteostationFactory;
-    private final MeteostationsPresenter meteostationsPresenter;
+    private MeteostationsDS meteostationsDS;
+    private MeteostationFactory meteostationFactory;
+    private MeteostationsPresenter meteostationsPresenter;
 
+    @Autowired
     public MeteostationsServiceImpl(MeteostationsDS meteostationsDS, MeteostationFactory meteostationFactory, MeteostationsPresenter meteostationsPresenter) {
         this.meteostationsDS = meteostationsDS;
         this.meteostationFactory = meteostationFactory;

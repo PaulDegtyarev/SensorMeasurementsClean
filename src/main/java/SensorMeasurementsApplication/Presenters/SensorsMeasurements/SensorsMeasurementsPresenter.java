@@ -1,7 +1,13 @@
 package SensorMeasurementsApplication.Presenters.SensorsMeasurements;
 
+import SensorMeasurementsApplication.Exceptions.SensorsMeasurements.SensorsMeasurementsSensorNotFoundException;
+import SensorMeasurementsApplication.Exceptions.SensorsMeasurements.SensorsMeasurementsTypeNotFoundException;
 import SensorMeasurementsApplication.Responses.SensorsMeasurements.SensorsMeasurementsResponseModel;
 
 public interface SensorsMeasurementsPresenter {
     SensorsMeasurementsResponseModel prepareSuccessView(SensorsMeasurementsResponseModel response);
+
+    SensorsMeasurementsSensorNotFoundException prepareSensorNotFoundView();
+
+    SensorsMeasurementsTypeNotFoundException prepareTypeNotFoundView();
 }

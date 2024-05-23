@@ -13,21 +13,18 @@ import SensorMeasurementsApplication.JPARepository.SensorsRepository;
 import SensorMeasurementsApplication.RequestBodies.SensorsMeasurements.Delete.SensorsMeasurementsRequestBodyDelete;
 import SensorMeasurementsApplication.RequestDataStoreModels.SensorsMeasurements.SensorsMeasurementsDSRequestModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.System.out;
-
 @Component
 public class SensorsMeasurementsDSImpl implements SensorsMeasurementsDS {
-    @Autowired
     private SensorsMeasurementsRepository sensorsMeasurementsRepository;
     private SensorsRepository sensorsRepository;
     private MeasurementsTypeRepository measurementsTypeRepository;
 
+    @Autowired
     public SensorsMeasurementsDSImpl(SensorsMeasurementsRepository sensorsMeasurementsRepository, SensorsRepository sensorsRepository, MeasurementsTypeRepository measurementsTypeRepository) {
         this.sensorsMeasurementsRepository = sensorsMeasurementsRepository;
         this.sensorsRepository = sensorsRepository;
@@ -63,5 +60,13 @@ public class SensorsMeasurementsDSImpl implements SensorsMeasurementsDS {
             SensorsMeasurementsEntity sensorsMeasurements = sensorsMeasurementsRepository.findById(key).orElseThrow(SensorsNotFoundException::new);
             sensorsMeasurementsRepository.delete(sensorsMeasurements);
         }
+    }
+
+    @Override
+    public boolean existsBySensorId(Integer sensorId){return sensorsRepository.existsBySensorId(sensorId);}
+
+    @Override
+    public boolean existsByTypeId(Integer typeId){
+        return measurementsTypeRepository.existsByTypeId(typeId);
     }
 }

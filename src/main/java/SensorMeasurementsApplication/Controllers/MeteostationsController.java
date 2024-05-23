@@ -14,9 +14,9 @@ import java.util.List;
 
 @RestController
 public class MeteostationsController {
-    @Autowired
     private MeteostationsService meteostationsService;
 
+    @Autowired
     public MeteostationsController(MeteostationsService meteostationsService) {
         this.meteostationsService = meteostationsService;
     }

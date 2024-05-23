@@ -24,11 +24,11 @@ import java.util.List;
 
 @Service
 public class SensorsServiceImpl implements SensorsService{
-    @Autowired
     final SensorsDS sensorsDS;
     final SensorsFactory sensorsFactory;
     final SensorsPresenter sensorsPresenter;
 
+    @Autowired
     public SensorsServiceImpl(SensorsDS sensorsDS, SensorsFactory sensorsFactory, SensorsPresenter sensorsPresenter) {
         this.sensorsDS = sensorsDS;
         this.sensorsFactory = sensorsFactory;

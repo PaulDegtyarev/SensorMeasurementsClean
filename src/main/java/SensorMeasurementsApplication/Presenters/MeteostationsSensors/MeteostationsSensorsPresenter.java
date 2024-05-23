@@ -1,7 +1,9 @@
 package SensorMeasurementsApplication.Presenters.MeteostationsSensors;
 
 import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsConflictException;
-import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsNotFoundException;
+import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsInvNumbNotFoundException;
+import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsSensorNotFoundException;
+import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsStationNotFoundException;
 import SensorMeasurementsApplication.Responses.MeteostationsSensors.Get.MeteostationsSensorsGetResponseModel;
 import SensorMeasurementsApplication.Responses.MeteostationsSensors.Post.MeteostationsSensorsPostResponse;
 
@@ -12,5 +14,9 @@ public interface MeteostationsSensorsPresenter {
 
     MeteostationsSensorsGetResponseModel prepareSuccsessGetView(MeteostationsSensorsGetResponseModel response);
 
-    MeteostationsSensorsNotFoundException prepareNotFoundView();
+    MeteostationsSensorsInvNumbNotFoundException prepareInventoryNumberNotFoundView();
+
+    MeteostationsSensorsStationNotFoundException prepareStationNotFoundView();
+
+    MeteostationsSensorsSensorNotFoundException prepareSensorNotFoundView();
 }

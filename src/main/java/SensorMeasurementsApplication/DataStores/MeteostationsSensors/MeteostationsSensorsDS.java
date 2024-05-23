@@ -17,4 +17,10 @@ public interface MeteostationsSensorsDS {
     boolean existsByStationIdAndSensorId(Integer stationId, Integer sensorId);
 
     boolean existsBySensorInventoryNumber(Integer sensorInventoryNumber);
+
+    boolean existsByStationId(Integer stationId);
+
+    boolean existsBySensorId(Integer sensorId);
+
+    MeteostationsEntity one(Integer stationId);
 }

@@ -33,32 +33,22 @@ import java.util.Map;
 
 @Service
 public class MeteostationsSensorsServiceImpl implements MeteostationsSensorsService{
-    @Autowired
     private MeteostationsSensorsDS meteostationsSensorsDS;
-    private MeteostationsDS meteostationsDS;
-    private SensorsDS sensorsDS;
-
     private MeteostationsSensorsPresenter meteostationsSensorsPresenter;
-    private MeteostationsPresenter meteostationsPresenter;
-    private SensorsPresenter sensorsPresenter;
-
     private MeteostationsSensorsFactory meteostationsSensorsFactory;
 
-    public MeteostationsSensorsServiceImpl(MeteostationsSensorsDS meteostationsSensorsDS, MeteostationsDS meteostationsDS, SensorsDS sensorsDS, MeteostationsSensorsPresenter meteostationsSensorsPresenter, MeteostationsPresenter meteostationsPresenter, SensorsPresenter sensorsPresenter, MeteostationsSensorsFactory meteostationsSensorsFactory) {
+    @Autowired
+    public MeteostationsSensorsServiceImpl(MeteostationsSensorsDS meteostationsSensorsDS, MeteostationsSensorsPresenter meteostationsSensorsPresenter, MeteostationsSensorsFactory meteostationsSensorsFactory) {
         this.meteostationsSensorsDS = meteostationsSensorsDS;
-        this.meteostationsDS = meteostationsDS;
-        this.sensorsDS = sensorsDS;
         this.meteostationsSensorsPresenter = meteostationsSensorsPresenter;
-        this.meteostationsPresenter = meteostationsPresenter;
-        this.sensorsPresenter = sensorsPresenter;
         this.meteostationsSensorsFactory = meteostationsSensorsFactory;
     }
 
     @Override
     public MeteostationsSensorsPostResponse create(MeteostationsSensorsRequestBody data){
         for (MSRequestBodyList el : data.getMeteostations_sensors()) {
-            if (!meteostationsDS.existsByStationId(el.getStation_id())) throw meteostationsPresenter.prepareNotFoundView();
-            if (sensorsDS.existsBySensorId(el.getSensor_id())) throw sensorsPresenter.prepareSensorsNotFoundView();
+            if (!meteostationsSensorsDS.existsByStationId(el.getStation_id())) throw meteostationsSensorsPresenter.prepareStationNotFoundView();
+            if (!meteostationsSensorsDS.existsBySensorId(el.getSensor_id())) throw meteostationsSensorsPresenter.prepareSensorNotFoundView();
             if (meteostationsSensorsDS.existsByStationIdAndSensorId(el.getStation_id(), el.getSensor_id())) throw meteostationsSensorsPresenter.prepareConflictView();
         }
 
@@ -73,7 +63,7 @@ public class MeteostationsSensorsServiceImpl implements MeteostationsSensorsServ
 
     @Override
     public void delete(Integer sensorInventoryNumber, MeteostationsSensorsDeleteRequestBody data){
-        if (!meteostationsSensorsDS.existsBySensorInventoryNumber(sensorInventoryNumber)) throw meteostationsSensorsPresenter.prepareNotFoundView();
+        if (!meteostationsSensorsDS.existsBySensorInventoryNumber(sensorInventoryNumber)) throw meteostationsSensorsPresenter.prepareInventoryNumberNotFoundView();
 
         MeteostationsSensorsDelete model = meteostationsSensorsFactory.createForDelete(sensorInventoryNumber, data);
 
@@ -128,7 +118,7 @@ public class MeteostationsSensorsServiceImpl implements MeteostationsSensorsServ
             Integer stationId = entry.getKey();
             List<MeteostationsSensorsSensorsList> sensors = entry.getValue();
 
-            MeteostationsEntity meteostationsEntity = meteostationsDS.one(stationId);
+            MeteostationsEntity meteostationsEntity = meteostationsSensorsDS.one(stationId);
 
             MeteostationsSensorsMeteostationInfo meteostation = new MeteostationsSensorsMeteostationInfo(meteostationsEntity.getStationId(), meteostationsEntity.getStationName(), meteostationsEntity.getStationLongitude(), meteostationsEntity.getStationLatitude(), sensors);
 

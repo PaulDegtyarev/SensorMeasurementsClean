@@ -1,11 +1,13 @@
 package SensorMeasurementsApplication.DataStores.MeteostationsSensors;
 
 import SensorMeasurementsApplication.CustomModels.MeteostationsSensors.MeteostationsSensors;
-import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsNotFoundException;
+import SensorMeasurementsApplication.Exceptions.Meteostations.MeteostationsNotFoundException;
+import SensorMeasurementsApplication.Exceptions.MeteostationsSensors.MeteostationsSensorsInvNumbNotFoundException;
 import SensorMeasurementsApplication.JPAEntities.MeteostationsEntity;
 import SensorMeasurementsApplication.JPAEntities.MeteostationsSensorsEntity;
 import SensorMeasurementsApplication.JPARepository.MeteostationsRepository;
 import SensorMeasurementsApplication.JPARepository.MeteostationsSensorsRepository;
+import SensorMeasurementsApplication.JPARepository.SensorsRepository;
 import SensorMeasurementsApplication.RequestDataStoreModels.MeteostationsSensors.MeteostationsSensorsDSRequestModel;
 import SensorMeasurementsApplication.RequestDataStoreModels.MeteostationsSensors.MeteostationsSensorsDSRequestModelForDelete;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +18,15 @@ import java.util.List;
 
 @Component
 public class MeteostationsSensorsDSImpl implements MeteostationsSensorsDS {
-    @Autowired
     private MeteostationsSensorsRepository meteostationsSensorsRepository;
     private MeteostationsRepository meteostationsRepository;
+    private SensorsRepository sensorsRepository;
 
-    public MeteostationsSensorsDSImpl(MeteostationsSensorsRepository meteostationsSensorsRepository, MeteostationsRepository meteostationsRepository) {
+    @Autowired
+    public MeteostationsSensorsDSImpl(MeteostationsSensorsRepository meteostationsSensorsRepository, MeteostationsRepository meteostationsRepository, SensorsRepository sensorsRepository) {
         this.meteostationsSensorsRepository = meteostationsSensorsRepository;
         this.meteostationsRepository = meteostationsRepository;
+        this.sensorsRepository = sensorsRepository;
     }
 
     @Override
@@ -40,7 +44,7 @@ public class MeteostationsSensorsDSImpl implements MeteostationsSensorsDS {
 
     @Override
     public void delete(MeteostationsSensorsDSRequestModelForDelete dsRequest){
-        MeteostationsSensorsEntity meteostationsSensors = meteostationsSensorsRepository.findById(dsRequest.getSensorInventoryNumber()).orElseThrow(MeteostationsSensorsNotFoundException::new);
+        MeteostationsSensorsEntity meteostationsSensors = meteostationsSensorsRepository.findById(dsRequest.getSensorInventoryNumber()).orElseThrow(MeteostationsSensorsInvNumbNotFoundException::new);
         meteostationsSensors.setRemovedTS(dsRequest.getRemovedTS());
         meteostationsSensorsRepository.save(meteostationsSensors);
     }
@@ -57,4 +61,17 @@ public class MeteostationsSensorsDSImpl implements MeteostationsSensorsDS {
 
     @Override
     public boolean existsBySensorInventoryNumber(Integer sensorInventoryNumber){return meteostationsSensorsRepository.existsBySensorInventoryNumber(sensorInventoryNumber);}
+
+    @Override
+    public boolean existsByStationId(Integer stationId){
+        return meteostationsRepository.existsByStationId(stationId);
+    }
+
+    @Override
+    public boolean existsBySensorId(Integer sensorId){return sensorsRepository.existsBySensorId(sensorId);}
+
+    @Override
+    public MeteostationsEntity one(Integer stationId){return meteostationsRepository.findById(stationId).orElseThrow(MeteostationsNotFoundException::new);}
+
+
 }
