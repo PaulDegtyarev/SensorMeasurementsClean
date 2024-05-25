@@ -8,6 +8,7 @@ import SensorMeasurementsApplication.Services.Meteostations.MeteostationsService
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class MeteostationsController {
     }
 
     @PostMapping("/meteostations")
+    @Transactional
     ResponseEntity<MeteostationResponseModel> create(@RequestBody MeteostationRequestBody data){
         return new ResponseEntity<>(meteostationsService.create(data), HttpStatus.CREATED);
     }

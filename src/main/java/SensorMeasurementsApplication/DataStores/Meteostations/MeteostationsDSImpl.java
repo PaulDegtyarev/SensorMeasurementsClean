@@ -1,5 +1,6 @@
 package SensorMeasurementsApplication.DataStores.Meteostations;
 
+import SensorMeasurementsApplication.Exceptions.Meteostations.MeteostationsConflictException;
 import SensorMeasurementsApplication.Exceptions.Meteostations.MeteostationsNotFoundException;
 import SensorMeasurementsApplication.JPAEntities.MeteostationsEntity;
 import SensorMeasurementsApplication.JPAEntities.MeteostationsSensorsEntity;
@@ -13,6 +14,8 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
+import static java.lang.System.out;
 
 @Component
 public class MeteostationsDSImpl implements MeteostationsDS{
@@ -86,7 +89,7 @@ public class MeteostationsDSImpl implements MeteostationsDS{
     public boolean hasMeasurements(Integer stationId){
         MeteostationsEntity meteostation = meteostationsRepository.findById(stationId).orElseThrow(MeteostationsNotFoundException::new);
         List<MeteostationsSensorsEntity> meteostationsSensorsList = meteostation.getMeteostationsSensors();
-        for (MeteostationsSensorsEntity el : meteostationsSensorsList){
+        for (MeteostationsSensorsEntity el : meteostationsSensorsList) {
             if (!el.getMeasurement().isEmpty()) return true;
         }
         return false;

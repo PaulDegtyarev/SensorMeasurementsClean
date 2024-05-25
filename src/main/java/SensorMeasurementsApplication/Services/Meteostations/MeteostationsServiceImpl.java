@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.System.out;
+
 @Service
 public class MeteostationsServiceImpl implements MeteostationsService {
     private MeteostationsDS meteostationsDS;
@@ -48,7 +50,9 @@ public class MeteostationsServiceImpl implements MeteostationsService {
     @Override
     public void delete(Integer stationId){
         if (!meteostationsDS.existsByStationId(stationId)) throw meteostationsPresenter.prepareNotFoundView();
+        out.println(meteostationsDS.hasMeasurements(stationId));
         if (meteostationsDS.hasMeasurements(stationId)) throw meteostationsPresenter.prepareConflictView();
+
         meteostationsDS.delete(stationId);
     }
 

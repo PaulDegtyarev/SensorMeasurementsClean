@@ -14,7 +14,7 @@ public class MeteostationsSensorsEntity {
     @Column(name = "sensor_inventory_number") @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer sensorInventoryNumber;
     @Column(name = "station_id") private Integer stationId;
     @Column(name = "sensor_id") private Integer sensorId;
-    @Column(name = "added_ts") @CreationTimestamp private Instant addedTS;
+    @Column(name = "added_ts") private Instant addedTS;
     @Column(name = "removed_ts", columnDefinition = "TIMESTAMP DEFAULT '9999-01-01 00:00:00'") private Timestamp removedTS = Timestamp.valueOf("9999-01-01 00:00:00");
 
     @ManyToOne

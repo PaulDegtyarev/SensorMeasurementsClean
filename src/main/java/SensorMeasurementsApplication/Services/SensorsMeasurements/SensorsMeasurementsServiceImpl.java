@@ -47,6 +47,7 @@ public class SensorsMeasurementsServiceImpl implements SensorsMeasurementsServic
 
         List<SensorsMeasurements> sensorsMeasurements = sensorsMeasurementsFactory.create(sensorId, data);
 
+
         SensorsMeasurementsDSRequestModel dsRequest = new SensorsMeasurementsDSRequestModel(sensorsMeasurements);
 
         List<SensorsMeasurementsEntity> dsResponse = sensorsMeasurementsDS.create(dsRequest);
@@ -56,7 +57,7 @@ public class SensorsMeasurementsServiceImpl implements SensorsMeasurementsServic
 
     @Override
     public void delete(Integer sensorId, SensorsMeasurementsRequestBodyDelete measurementsType){
-        if (sensorsMeasurementsDS.existsBySensorId(sensorId)) throw sensorsMeasurementsPresenter.prepareSensorNotFoundView();
+        if (!sensorsMeasurementsDS.existsBySensorId(sensorId)) throw sensorsMeasurementsPresenter.prepareSensorNotFoundView();
 
         for (Integer typeId : measurementsType.getMeasurements_type()){
             if (!sensorsMeasurementsDS.existsByTypeId(typeId)) throw sensorsMeasurementsPresenter.prepareTypeNotFoundView();

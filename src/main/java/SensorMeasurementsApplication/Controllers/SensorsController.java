@@ -27,7 +27,7 @@ public class SensorsController {
     }
 
     @PostMapping("/sensor")
-    @Transactional()
+    @Transactional
     ResponseEntity<SensorsResponseModelPost> create(@RequestBody SensorsPostRequestBody data){return new ResponseEntity<>(sensorsService.create(data), HttpStatus.CREATED);}
 
     @DeleteMapping("/sensor/{sensor_id}")

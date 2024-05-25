@@ -90,7 +90,7 @@ public class MeasurementsServiceImpl implements MeasurementsService {
 
     @Override
     public void deleteBySensorId(Integer sensorId){
-        if (!measurementsDS.existsBySensorId(sensorId)) measurementsPresenter.prepareNotFoundView();
+        if (!measurementsDS.existsBySensorId(sensorId)) throw measurementsPresenter.prepareNotFoundView();
 
         measurementsDS.deleteBySensorId(sensorId);
     }

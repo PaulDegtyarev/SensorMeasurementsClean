@@ -8,6 +8,7 @@ import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -24,6 +25,7 @@ public class MeasurementsController {
     }
 
     @PostMapping("/measurements")
+    @Transactional
     ResponseEntity<MeasurementsPostResponseModel> create(@RequestBody MeasurementsRequestBodyList data){
         return new ResponseEntity<>(measurementsService.create(data), HttpStatus.CREATED);
     }

@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.System.out;
+
 @Component
 public class MeteostationsSensorsDSImpl implements MeteostationsSensorsDS {
     private MeteostationsSensorsRepository meteostationsSensorsRepository;

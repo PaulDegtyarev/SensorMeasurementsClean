@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.System.out;
+
 @Service
 public class MeteostationsSensorsServiceImpl implements MeteostationsSensorsService{
     private MeteostationsSensorsDS meteostationsSensorsDS;

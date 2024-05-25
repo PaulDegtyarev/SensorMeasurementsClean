@@ -21,6 +21,7 @@ public class MeteostationsSensorsFactoryImpl implements MeteostationsSensorsFact
         List<MeteostationsSensors> modelsList = new ArrayList<>();
 
         for (MSRequestBodyList el : data.getMeteostations_sensors()){
+            if (el.getAdded_ts() == null) el.setAdded_ts(Instant.now());
             MeteostationsSensors model = new MeteostationsSensorsImpl(el.getStation_id(), el.getSensor_id(), el.getAdded_ts());
             modelsList.add(model);
         }
